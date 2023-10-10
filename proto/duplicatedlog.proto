@@ -2,8 +2,11 @@ syntax = "proto3";
 
 package duplicatedlog;
 
-service Protocol {
+service MasterProtocol {
   rpc register_secondary_node (Request) returns (Response) {}
+}
+
+service SecondaryProtocol {
   rpc replicate (Request) returns (Response) {}
 }
 
