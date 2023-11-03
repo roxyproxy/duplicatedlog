@@ -1,0 +1,55 @@
+services:
+  master:
+    build:
+      context: .
+      dockerfile: dockerfile.master
+    container_name: master
+    ports:
+      - 8050:8050
+    environment:
+      - MASTER_PORT=50050
+  secondary1:
+    build:
+      context: .
+      dockerfile: dockerfile.secondary
+    container_name: secondary1
+    ports:
+      - 8051:8051
+    environment:
+      - MASTER_HOST=master
+      - MASTER_PORT=50050
+      - SECONDARY_HOST=secondary1
+      - SECONDARY_PORT=50051
+      - DELAY=0
+    depends_on:
+      - master
+  secondary2:
+    build:
+      context: .
+      dockerfile: dockerfile.secondary
+    container_name: secondary2
+    ports:
+      - 8052:8051
+    environment:
+      - MASTER_HOST=master
+      - MASTER_PORT=50050
+      - SECONDARY_HOST=secondary2
+      - SECONDARY_PORT=50052
+      - DELAY=0
+    depends_on:
+      - master
+  secondary3:
+    build:
+      context: .
+      dockerfile: dockerfile.secondary
+    container_name: secondary3
+    ports:
+      - 8053:8051
+    environment:
+      - MASTER_HOST=master
+      - MASTER_PORT=50050
+      - SECONDARY_HOST=secondary3
+      - SECONDARY_PORT=50053
+      - DELAY=10
+    depends_on:
+      - master

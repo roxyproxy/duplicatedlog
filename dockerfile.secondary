@@ -1,0 +1,17 @@
+FROM python:3.11.5-slim
+
+WORKDIR /app
+
+RUN pip install Flask
+RUN pip install flask-restful
+RUN pip install grpcio
+RUN pip install grpcio-tools
+
+# this will copy application code to working directory
+#COPY . /app/
+COPY . .
+
+# indicates the ports on which a container listens for connections\
+EXPOSE 8051
+
+CMD ["python", "secondary.py"]}
