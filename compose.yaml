@@ -7,7 +7,8 @@ services:
     ports:
       - 8050:8050
     environment:
-      - MASTER_PORT=50050
+      - MASTER_PORT=8050
+      - MASTER_GRPC_PORT=50050
   secondary1:
     build:
       context: .
@@ -16,10 +17,11 @@ services:
     ports:
       - 8051:8051
     environment:
-      - MASTER_HOST=master
-      - MASTER_PORT=50050
-      - SECONDARY_HOST=secondary1
-      - SECONDARY_PORT=50051
+      - SECONDARY_PORT=8051
+      - MASTER_GRPC_HOST=master
+      - MASTER_GRPC_PORT=50050
+      - SECONDARY_GRPC_HOST=secondary1
+      - SECONDARY_GRPC_PORT=50051
       - DELAY=0
     depends_on:
       - master
@@ -31,10 +33,11 @@ services:
     ports:
       - 8052:8051
     environment:
-      - MASTER_HOST=master
-      - MASTER_PORT=50050
-      - SECONDARY_HOST=secondary2
-      - SECONDARY_PORT=50052
+      - SECONDARY_PORT=8051
+      - MASTER_GRPC_HOST=master
+      - MASTER_GRPC_PORT=50050
+      - SECONDARY_GRPC_HOST=secondary2
+      - SECONDARY_GRPC_PORT=50052
       - DELAY=0
     depends_on:
       - master
@@ -46,10 +49,11 @@ services:
     ports:
       - 8053:8051
     environment:
-      - MASTER_HOST=master
-      - MASTER_PORT=50050
-      - SECONDARY_HOST=secondary3
-      - SECONDARY_PORT=50053
+      - SECONDARY_PORT=8051
+      - MASTER_GRPC_HOST=master
+      - MASTER_GRPC_PORT=50050
+      - SECONDARY_GRPC_HOST=secondary3
+      - SECONDARY_GRPC_PORT=50053
       - DELAY=10
     depends_on:
       - master
